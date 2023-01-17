@@ -1,0 +1,79 @@
+---
+title: "Analysis of IMDB Movie Data"
+output: html_notebook
+---
+
+
+```{r}
+# Q1 Top 10 rated movies All-time
+Top_10_rated <- Movie_list %>%
+  arrange(desc(rating)) %>%
+  head(10)
+Top_10_rated
+```
+Scam 1992 is the all time highest rated movie of all time with ratings of 9.3. It is followed by House of Secrets and Sacred Games which wee rated 9.2 and 9.1 respectively.
+
+```{r}
+#Top 10 rated movies in 2022
+top_5_2022 <- Movie_list %>%
+  filter(year == "2022") %>%
+  arrange(desc(rating)) %>%
+  head(10)
+top_5_2022
+
+```
+In 2022 Major became the highest rated movie with rating of 9.1 and it was followed by the Gone Game and Tapana which were rated as 9.0 and 8.9 respectively.
+```{r}
+Top_3_genre <- Movie_list %>%
+  count(GENRE) %>%
+  arrange(desc(n))
+Top_3_genre
+```
+Action, Drama and Comedy are proved to be the favourite genre of public.
+
+
+```{r}
+# Bar_Plot
+ggplot(data = Movie_list) +
+geom_bar(mapping = aes(x = GENRE, fill = GENRE, width = 0.5)) +
+  theme_classic() +
+  labs(title = "Top Genre list", subtitle = "From 550 highest voted movies", y = "Count") +
+  annotate("text", x = 1.7, y = 180, label = "Action ", color = "pink", fontface = "bold") +
+  annotate("text", x = 5.7, y = 130, label = "Comedy ", color = "yellowgreen", fontface = "bold") +
+  annotate("text", x = 8.7, y = 140, label = "Drama ", color = "green", fontface = "bold")
+```
+```{r}
+#Top 3 Gemre in 2022
+top_5_genre_2022 <- Movie_list %>%
+  filter(year == "2022") %>%
+  count(GENRE) %>%
+  arrange(desc(n)) %>% 
+  head(3)
+top_5_genre_2022
+```
+Even in 2022 the favourite genre list remained same.
+
+
+
+```{r}
+#Q3 Lowest 5 Genre
+low_5_genre <- Movie_list %>%
+  count(GENRE) %>%
+  arrange(n) %>%
+  head(5)
+low_5_genre
+
+```
+
+Genre like short movies, Family and Fantasy were least popular.
+
+```{r}
+#Q4 Lowest 5 rated movies
+low_5_rated <- Movie_list %>%
+  arrange(rating) %>%
+  head(5)
+low_5_rated
+```
+The Above 5 movies are the lowest rated movies on IMDB website.
+
+
